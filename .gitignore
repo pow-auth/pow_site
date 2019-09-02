@@ -10,3 +10,4 @@ node_modules
 package-lock.json
 Gemfile.lock
 _includes/tailwind.js
+build

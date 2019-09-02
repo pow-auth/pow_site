@@ -43,3 +43,5 @@ exclude:
   - postcss.config.js
   - purgecss.config.js
   - .gitignore
+  - LICENSE
+  - package-lock.json
