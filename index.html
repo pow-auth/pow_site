@@ -75,14 +75,14 @@ layout: default
       <div class="px-6 text-left md:text-center xl:text-left max-w-2xl md:max-w-3xl mx-auto">
         <h1 class="text-3xl sm:text-4xl md:text-5xl xl:text-4xl font-light leading-tight">A robust, modular and extendable<span class="sm:block text-indigo-400 font-normal">user management solution.</span></h1>
         <p class="mt-6 leading-relaxed sm:text-lg md:text-xl xl:text-lg text-gray-400">
-          Pow is a complete authentication and user management library built in Elixir, and works out of the box for Phoenix applications.
+          Pow is a complete authentication and user management library built in Elixir that works out-of-the-box for Phoenix and Plus based applications while being fully customizable.
         </p>
         <div class="flex mt-6 justify-start md:justify-center xl:justify-start">
           <a href="https://hexdocs.pm/pow/README.html#installation" class="rounded-lg px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3 bg-indigo-500 hover:bg-indigo-600 md:text-lg xl:text-base text-gray-300 font-semibold leading-tight shadow-md">Get Started</a>
         </div>
       </div>
       <div class="mt-12 xl:mt-0 px-6 flex-shrink-0 hidden md:block">
-        <div class="mx-auto" style="width: 40rem;overflow:hidden;">
+        <div class="mx-auto" style="width: 32.2rem;overflow:hidden;">
           <div class="flex flex-col">
             <div class="shadow-lg code-white text-sm font-mono subpixel-antialiased bg-gray-800 px-5 pb-6 pt-4 rounded-lg leading-normal overflow-hidden" style="width: 30rem; line-height: 1.675;">
               <div class="flex mb-4">
@@ -114,15 +114,10 @@ layout: default
               <div class="whitespace-no-wrap">
                 <div class="inline-block text-gray-600">46&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                 <div class="inline-block">
-                  <span class="text-purple-400">{</span>
-                  <span class="text-orange-400">:</span>
-                  <span class="text-teal-400">pow</span>
-                  <span class="text-gray-200">,</span>
+                  <span class="text-purple-400">{</span><span class="text-orange-400">:</span><span class="text-teal-400">pow</span><span class="text-gray-200">,</span>
                 </div>
                 <div class="inline-block">
-                  <span class="text-green-400">"~> 1.0.0"</span>
-                  <span class="text-purple-400">}</span>
-                  <span class="text-gray-200"></span>
+                  <span class="text-green-400">"~> 1.0.0"</span><span class="text-purple-400">}</span><span class="text-gray-200"></span>
                 </div>
               </div>
               <div class="whitespace-no-wrap">
@@ -182,7 +177,7 @@ layout: default
       </p>  
     </div>
     <div class="w-full md:w-1/2">
-      <div class="mt-12 xl:mt-0 px-6 flex-shrink-0 hidden md:block">
+      <div class="mt-12 xl:mt-0 px-6 flex-shrink-0 md:block">
         <div class="flex flex-col">
           <div class="shadow-lg code-white text-sm font-mono subpixel-antialiased bg-gray-300 px-5 pb-6 pt-4 rounded-lg leading-normal overflow-hidden">
             <div class="flex mb-4">
@@ -213,15 +208,65 @@ layout: default
             </div>
           </div>
         </div>
+        <script type="text/javascript">
+          let i = 0;
+          let txt = 'john.doe@example.com';
+          let minSpeed = 50;
+          let maxSpeed = 150;
+          let input = document.querySelector("#user\\[email\\]");
+          let label = document.querySelector("[for=\"user[email]\"]")
+
+          label.style = "transition: all 1s;"
+          
+          function switchUserId() {
+            if (label.innerHTML == "Email") {
+              label.innerHTML = "Username"
+              input.placeholder = "Username"
+              txt = 'john.doe'
+            } else {
+              label.innerHTML = "Email"
+              input.placeholder = "Email"
+              txt = 'john.doe@example.com'
+            }
+            label.style = "transition: all 1s;opacity:0;"
+
+            setTimeout(function() {
+              label.style = "transition: all 1s;"
+            }, 250)
+          }
+
+          function typeWriter() {
+            let speed = minSpeed + Math.random() * (maxSpeed - minSpeed)
+
+            input.value += txt.charAt(i);
+            i++;
+
+            if (i == txt.length) {
+              speed = 3000
+            } else if(i > txt.length) {
+              speed = 400
+              i = 0
+              input.value = ""
+
+              switchUserId()
+            }
+
+            setTimeout(typeWriter, speed);
+          }
+
+          input.value = "";
+
+          typeWriter();
+          </script>
       </div>
     </div>
   </div>
 
   <div class="flex items-center flex-wrap mb-20">
     <div class="w-full md:w-1/2">
-      <div id="robotanimation">
+      <div id="robotanimation" class="px-6">
         <!-- Credits https://codepen.io/lwoodrick/pen/EbjJK -->
-        <svg version="1.1" id="ship_it" x="0px" y="0px" width="400px" height="400.004px" viewBox="0 0 400 400.004" enable-background="new 0 0 400 400.004" xml:space="preserve" preserveAspectRatio="xMinYMin">
+        <svg version="1.1" id="ship_it" x="0px" y="0px" width="100%" height="400.004px" viewBox="0 0 400 400.004" enable-background="new 0 0 400 400.004" xml:space="preserve" preserveAspectRatio="xMinYMin" style="margin: auto;max-width:400px;">
           <defs>
             <clipPath id="fundamentalsclipPath">
             <circle fill="none" cx="400" cy="400" r="200"/>
@@ -413,10 +458,10 @@ layout: default
     <div class="w-full md:w-1/2 pl-10">
       <h3 class="text-3xl text-gray-800 font-bold mb-3">Production-ready</h3>
       <p class="text-gray-600 mb-8">
-        Pow has been used in countless production apps with batteries-included production features. The cache backend store used for session storage <a href="https://hexdocs.pm/pow/README.html#pow-plug-session" class="underline">can be replaced with any key-value store of your choice</a>.
+        Pow has been used in countless production apps and is a "batteries included" library for production. The cache backend store used for session storage <a href="https://hexdocs.pm/pow/README.html#pow-plug-session" class="underline">can be replaced with any key-value store of your choice</a>.
       </p>
       <p class="text-gray-600 mb-8">
-        The <a href="https://hexdocs.pm/pow/Pow.Store.Backend.MnesiaCache.html#content" class="underline">built-in Mnesia cache module</a> works both for clusters and single machine persistence. It can both automatically connect to the cluster on startup and self-heal after netsplits.
+        The <a href="https://hexdocs.pm/pow/Pow.Store.Backend.MnesiaCache.html#content" class="underline">built-in Mnesia cache module</a> works both for clusters and single machine persistence, that can auto-connect to the cluster on startup and self-heal after netsplit.
       </p>
     </div>
   </div>
@@ -424,24 +469,21 @@ layout: default
   <div class="flex items-center flex-wrap mb-20">
     <div class="w-full md:w-1/2">
       <h3 class="text-3xl text-gray-800 font-bold mb-3">Extendable</h3>
-      <p class="text-gray-600 mb-4">
-        Pow includes several extensions so you effortlessly can add to your app;
+      <p class="text-gray-600 mb-6">
+        Pow is extremely modular and fully customizable. As your platform scales, each moving part can be modified or replaced ad-hoc. Several extensions are included in Pow so you with no effort can add secure features to your app like these:
       </p>
       <ul class="text-gray-600 mb-8 list-disc list-inside">
-        <li><a href="https://hexdocs.pm/pow/pow_reset_password.html" class="underline">password reset</a></li>
-        <li><a href="https://hexdocs.pm/pow/pow_email_confirmation.html" class="underline">e-mail confirmation</a></li>
-        <li><a href="https://hexdocs.pm/pow/pow_invitation.html" class="underline">invitation</a></li>
-        <li><a href="https://hexdocs.pm/pow/pow_persistent_session.html" class="underline">remember me</a></li>
+        <li><a href="https://hexdocs.pm/pow/pow_reset_password.html" class="underline">Password reset</a></li>
+        <li><a href="https://hexdocs.pm/pow/pow_email_confirmation.html" class="underline">E-mail confirmation</a></li>
+        <li><a href="https://hexdocs.pm/pow/pow_invitation.html" class="underline">Invitation</a></li>
+        <li><a href="https://hexdocs.pm/pow/pow_persistent_session.html" class="underline">Remember me</a></li>
       </ul>
       <p class="text-gray-600 mb-8">
-        <a href="https://hexdocs.pm/pow_assent/README.html" class="underline">PowAssent</a> can add multi-provider support for countless providers like Github, Facebook and Twitter.
+        <a href="https://hexdocs.pm/pow_assent/README.html" class="underline">PowAssent</a> adds multi-provider support so your app can permit sign in with Github, Twitter or any other external profiles.
       </p>
-      <p class="text-gray-600 mb-8">
-        Pow is extremely modular and highly customizable. As your platform scales, each moving part can be modified or replaced ad-hoc.
-      </p>  
     </div>
     <div class="w-full md:w-1/2">
-      <div class="mt-12 xl:mt-0 px-6 flex-shrink-0 hidden md:block">
+      <div class="mt-12 xl:mt-0 px-6 flex-shrink-0 md:block">
         <div class="flex flex-col">
           <div class="shadow-lg code-white text-sm font-mono subpixel-antialiased bg-gray-300 px-5 pb-6 pt-4 rounded-lg leading-normal overflow-hidden">
             <div class="flex mb-4">
