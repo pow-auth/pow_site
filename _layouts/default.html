@@ -1,0 +1,17 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  {% feed_meta %}
+  {% seo %}
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<html>
+  <body class="bg-gray-200 text-gray-600">
+    {{ content }}
+
+    {% if jekyll.environment == 'production' %}
+      {% include analytics.html %}
+    {% endif %}
+  </body>
+</html>
+
