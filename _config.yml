@@ -22,6 +22,7 @@ title: Pow - Robust, modular, and extendable user management for Elixir apps
 description: >- # this means to ignore newlines until next key
   Pow is a robust, modular, and extendable authentication and user management
   solution for Phoenix and Plug-based apps.
+destination: ./build
 
 # Build settings
 theme: minima
