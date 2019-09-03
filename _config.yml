@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Pow - Robust, modular, and extendable user management for Elixir apps
+title: Pow
 description: >- # this means to ignore newlines until next key
   Pow is a robust, modular, and extendable authentication and user management
   solution for Phoenix and Plug-based apps.
