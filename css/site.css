@@ -103,6 +103,10 @@ strong {
  * Remove the border on images inside links in IE 10.
  */
 
+img {
+  border-style: none;
+}
+
 /* Forms
    ========================================================================== */
 
@@ -384,6 +388,10 @@ html {
  * https://github.com/tailwindcss/tailwindcss/issues/362
  */
 
+img {
+  border-style: solid;
+}
+
 input::-webkit-input-placeholder {
   color: #a0aec0;
 }
@@ -456,7 +464,7 @@ input {
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
-
+img,
 svg,
 canvas {
   display: block;
@@ -469,6 +477,11 @@ canvas {
  *
  * https://github.com/mozdevs/cssremedy/issues/14
  */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 .container {
   width: 100%;
@@ -592,10 +605,6 @@ canvas {
   display: none;
 }
 
-.flex-row-reverse {
-  flex-direction: row-reverse;
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -616,16 +625,16 @@ canvas {
   justify-content: flex-start;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .justify-between {
   justify-content: space-between;
 }
 
-.flex-initial {
-  flex: 0 1 auto;
-}
-
-.flex-grow {
-  flex-grow: 1;
+.content-start {
+  align-content: flex-start;
 }
 
 .flex-shrink-0 {
@@ -804,8 +813,16 @@ canvas {
   padding-top: 1rem;
 }
 
+.pr-6 {
+  padding-right: 1.5rem;
+}
+
 .pb-6 {
   padding-bottom: 1.5rem;
+}
+
+.pr-8 {
+  padding-right: 2rem;
 }
 
 .pl-10 {
@@ -981,6 +998,10 @@ canvas {
   width: 16rem;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
 .w-full {
   width: 100%;
 }
@@ -1047,6 +1068,14 @@ canvas {
   .md\:w-1\/2 {
     width: 50%;
   }
+
+  .md\:w-1\/4 {
+    width: 25%;
+  }
+
+  .md\:w-3\/4 {
+    width: 75%;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -1087,5 +1116,13 @@ canvas {
 
   .xl\:text-4xl {
     font-size: 2.25rem;
+  }
+
+  .xl\:w-1\/5 {
+    width: 20%;
+  }
+
+  .xl\:w-4\/5 {
+    width: 80%;
   }
 }
