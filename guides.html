@@ -1,0 +1,24 @@
+---
+layout: page
+permalink: /guides/
+---
+
+<main class="max-w-xl mx-auto">
+  <div class="text-center">
+    <h1 class="leading-tight border-b text-4xl font-semibold mb-4 mt-6 pb-2 text-gray-800">Guides</h1>
+
+    <p class="mb-10">Please note that Pow has many <a href="https://hexdocs.pm/pow/README.html" class="text-blue-600 font-semibold">guides included in the docs</a>.</p>
+  </div>
+
+  <ul>
+    {% for guide in site.guides %}
+      <li class="mb-8 leading-normal border-l-4 border-blue-600 pl-4">
+        <a href="{{ guide.url }}" class="text-gray-700 hover:text-gray-900">
+          <h3 class="block text-xl font-bold">{{ guide.title }}</h3>
+          <p class="text-sm">{{ guide.date | date: "%B %-d, %Y" }}</p>
+          <p class="mt-4">{{ guide.excerpt }}</p>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</main>

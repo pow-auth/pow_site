@@ -2,4 +2,10 @@
 layout: default
 ---
 
-{{ content }}
+<header class="bg-gray-700 text-gray-300">
+  {% include nav-bar.html %}
+</header>
+  
+<main class="container max-w-4xl md:px-8 mx-auto pt-4">
+  {{ content }}
+</main>

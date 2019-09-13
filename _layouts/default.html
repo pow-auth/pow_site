@@ -8,7 +8,11 @@
 <html>
   <body class="bg-gray-200 text-gray-600">
     {{ content }}
-
+      
+    <footer class="text-center mb-6 mt-20">
+      <p class="text-xs">Copyright © 2019 ∙ MIT licensed ∙ Pow is an open source project by <a href="https://twitter.com/danschultzer" class="underline">Dan Schultzer</a> &amp; the <a href="https://github.com/danschultzer/pow/graphs/contributors" class="underline">Contributors</a> 🚀</p>
+    </footer>
+      
     {% if jekyll.environment == 'production' %}
       {% include analytics.html %}
     {% endif %}

@@ -23,6 +23,9 @@ description: >- # this means to ignore newlines until next key
   Pow is a robust, modular, and extendable authentication and user management
   solution for Phoenix and Plug-based apps.
 destination: ./build
+collections:
+  guides:
+    output: true
 
 # Build settings
 theme: minima
