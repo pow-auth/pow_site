@@ -269,6 +269,10 @@ legend {
  * Add the correct display in Edge, IE 10+, and Firefox.
  */
 
+details {
+  display: block;
+}
+
 /*
  * Add the correct display in all browsers.
  */
@@ -599,7 +603,7 @@ img {
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.875rem;
   display: inline;
-  background-color: #edf2f7;
+  background-color: #e2e8f0;
   border-radius: 0.25rem;
   padding-left: 0.25rem;
   padding-right: 0.25rem;
