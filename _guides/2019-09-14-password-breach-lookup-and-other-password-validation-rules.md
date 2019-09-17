@@ -18,7 +18,7 @@ They are based on the [NIST SP800-63b recommendations](https://pages.nist.gov/80
 
 ## Passwords obtained from previous breaches
 
-To check for breached passwords, we'll use the [haveibeenpwned.com](https://haveibeenpwned.com/).
+We'll use [haveibeenpwned.com](https://haveibeenpwned.com/) to check for breached passwords.
 
 For the sake of brevity, we'll use [`ExPwned`](https://hex.pm/packages/ex_pwned) in the following example, but you can use any client or your own [custom module](https://ieftimov.com/post/haveibeenpwned-password-lookup-elixir/) to communicate with the API.
 
@@ -35,7 +35,7 @@ end
 
 Run `mix deps.get` to install it.
 
-Now let's add the password validation rule to the user module:
+Now let's add the password validation rule to our user schema module:
 
 ```elixir
 defmodule MyApp.Users.User do
@@ -72,7 +72,13 @@ We'll only do a lookup if the password has been changed, and we don't do any loo
 
 ## Context-specific words, such as the name of the service, the username, and derivatives thereof
 
-We want to prevent context specific words. If the user id is `john.doe@example.com` (or `john.doe` if username), then the password can't be `john.doe@example.com` or `johndoeexamplecom` (or for username `john.doe00` or `johndoe001`). Likewise, our platform may be called `My Demo App` so we don't want to permit a passwords like `my demo app`, `my_demo_app` or `mydemoapp`.
+We want to prevent context specific words to be used as passwords.
+
+The context might be public user details. If the users email is `john.doe@example.com` then the password can't be `john.doe@example.com` or `johndoeexamplecom`. The same rule applies for any user id we may use, such as username. If the username is `john.doe` then `john.doe00` or `johndoe001` can't be used.
+
+Our app may also be part of a website/service/platform and have an identity. As an example, if the service is called `My Demo App` then we don't want to permit passwords like `my demo app`, `my_demo_app` or `mydemoapp`.
+
+We'll add the password validation rule to our user schema module:
 
 ```elixir
 defmodule MyApp.Users.User do
@@ -116,7 +122,9 @@ We're using the [`String.jaro_distance/2`](https://hexdocs.pm/elixir/String.html
 
 ## Repetitive or sequential characters
 
-We want to prevent repetitive passwords such as `aaa`, `1234` or `abcd`. We'll set up the following validations so there may be no more than two repeating or three sequential characters in the password.
+We want to prevent repetitive or sequential characters in passwords such as `aaa`, `1234` or `abcd`.
+
+The rule we'll use is that there may be no more than two repeating or three sequential characters in the password. We'll add the validation rule to our user schema module:
 
 ```elixir
 defmodule MyApp.Users.User do
@@ -183,11 +191,11 @@ defmodule MyApp.Users.User do
 end
 ```
 
-As you can see, you'll be able to modify `@sequences` and add what is appropriate for your app. It may be that you want to support another alphabet or keyboard sequences like `qwerty`.
+As you can see, you'll be able to modify `@sequences` and add what is appropriate for your app. It may be that you want to support another alphabet or keyboard layout sequences like `qwerty`.
 
 ## Dictionary words
 
-A dictionary lookup is very easy to create, so we will only provide a very simple example:
+A dictionary lookup is very easy to create. This is just a very simple example that you can add to your user schema module:
 
 ```elixir
 defmodule MyApp.Users.User do
@@ -228,15 +236,13 @@ defmodule MyApp.Users.User do
 end
 ```
 
-This will iterate through a plain text file with all dictionary words separated by newlines.
+In the above `priv/dictionary.txt` will be processed on compile time. The plain text file contains words separated by newline.
 
 ## Require users to change weak password upon sign in
 
 You may want to ensure that users update their password if they have been breached or are too weak. You can do this be requiring users to reset their password upon sign in.
 
-This can be dealt with in a plug, or [custom controller](https://hexdocs.pm/pow/custom_controllers.html). 
-
-Here's how a plug method could look:
+This can be dealt with in a plug, or [custom controller](https://hexdocs.pm/pow/custom_controllers.html). A plug method could look like this:
 
 ```elixir
 def check_password(conn, _opts) do
@@ -257,11 +263,15 @@ def check_password(conn, _opts) do
 end
 ```
 
+The user will be redirected to the reset password page, and the connection halted so authentication won't happen. A caveat to this is that the user may not have entered valid credentials, since this runs before any authentication.
+
 ## Conclusion
 
 As you can see it is easy to customize and extend the password validation rules of Pow.
 
-The landscape of web security is constantly changing, so it's important that password requirements are neither so restricting that it affects user experience or too lax that it affects security. The above will work for most cases in the current landscape, but you should also consider supporting 2FA authentication, or alternative authentication schemes such as WebAuthn or OAuth. It depends on your requirements and risk tolerance. It's recommended to take your time to assess what is appropriate for your app.
+The landscape of web security is constantly changing, so it's important that password requirements are neither so restricting that it affects user experience or too lax that it affects security. The above will work for most cases in the current landscape, but you should also consider supporting 2FA authentication, or alternative authentication schemes such as WebAuthn or OAuth.
+
+It depends on your requirements and risk tolerance. It's recommended to take your time to assess what is appropriate for your app.
 
 ## Unit tests
 

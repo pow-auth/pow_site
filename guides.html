@@ -11,7 +11,7 @@ permalink: /guides/
   </div>
 
   <ul>
-    {% for guide in site.guides %}
+    {% for guide in site.guides reversed %}
       <li class="mb-8 leading-normal border-l-4 border-blue-600 pl-4">
         <a href="{{ guide.url }}" class="text-gray-700 hover:text-gray-900">
           <h3 class="block text-xl font-bold">{{ guide.title }}</h3>
