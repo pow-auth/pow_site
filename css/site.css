@@ -638,6 +638,9 @@ img {
 pre.highlight { background-color: #e2e8f0;
 }
 
+.highlight .c { color: #999988; font-style: italic
+}
+
 /* Comment */
 
 /* Error */
@@ -688,6 +691,9 @@ pre.highlight { background-color: #e2e8f0;
 
 /* Generic.Subheading */
 
+.highlight .gt { color: #aa0000
+}
+
 /* Generic.Traceback */
 
 /* Keyword.Constant */
@@ -728,15 +734,27 @@ pre.highlight { background-color: #e2e8f0;
 
 /* Name.Tag */
 
+.highlight .nv { color: #008080
+}
+
 /* Name.Variable */
+
+.highlight .ow { font-weight: bold
+}
 
 /* Operator.Word */
 
 /* Text.Whitespace */
 
+.highlight .mf { color: #009999
+}
+
 /* Literal.Number.Float */
 
 /* Literal.Number.Hex */
+
+.highlight .mi { color: #009999
+}
 
 /* Literal.Number.Integer */
 
@@ -756,6 +774,9 @@ pre.highlight { background-color: #e2e8f0;
 /* Literal.String.Escape */
 
 /* Literal.String.Heredoc */
+
+.highlight .si { color: #d14
+}
 
 /* Literal.String.Interpol */
 
@@ -1302,6 +1323,10 @@ pre.highlight { background-color: #e2e8f0;
 
 .italic {
   font-style: italic;
+}
+
+.lowercase {
+  text-transform: lowercase;
 }
 
 .underline {
