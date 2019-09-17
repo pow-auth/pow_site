@@ -1,0 +1,28 @@
+name: Build and Deploy
+
+on:
+ push:
+    branches:
+    - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Setup ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.6'
+
+    - run: npm install && bundle install && bundle exec jekyll build
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2.3.1
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: build
