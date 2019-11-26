@@ -11,7 +11,7 @@
 <meta property="og:description" content="Pow is a robust, modular, and extendable authentication and user management solution for Phoenix and Plug-based apps." />
 <meta property="og:site_name" content="Pow" />
 <script type="application/ld+json">
-{"headline":"Pow","url":"/guides/","description":"Pow is a robust, modular, and extendable authentication and user management solution for Phoenix and Plug-based apps.","@type":"WebPage","@context":"https://schema.org"}</script>
+{"url":"/guides/","headline":"Pow","description":"Pow is a robust, modular, and extendable authentication and user management solution for Phoenix and Plug-based apps.","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <link rel="stylesheet" href="/css/site.css">
@@ -90,10 +90,19 @@
   <ul>
     
       <li class="mb-8 leading-normal border-l-4 border-blue-600 pl-4">
+        <a href="/guides/2020-03-07-resend-email-confirmation-link.html" class="text-gray-700 hover:text-gray-900">
+          <h3 class="block text-xl font-bold">Resend email confirmation link</h3>
+          <p class="text-sm">March 7, 2020</p>
+          <p class="mt-4"><p>You may wish to add a link to the account edit page so users can manually request the confirmation e-mail to be send again in case they didn’t receive it the first time.</p>
+</p>
+        </a>
+      </li>
+    
+      <li class="mb-8 leading-normal border-l-4 border-blue-600 pl-4">
         <a href="/guides/2019-09-14-password-breach-lookup-and-other-password-validation-rules.html" class="text-gray-700 hover:text-gray-900">
           <h3 class="block text-xl font-bold">Password breach lookup and other password validation rules</h3>
           <p class="text-sm">September 14, 2019</p>
-          <p class="mt-4"><p>By default Pow has a lax requirement of minimum 10 characters based on <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf">NIST 800-132</a>, but there are many more types of validations you can use to ensure users don’t rely on weak passwords.</p>
+          <p class="mt-4"><p>By default Pow has a lax requirement of minimum 8 characters based on <a href="https://pages.nist.gov/800-63-3/sp800-63b.html">NIST SP800-63b</a>, but there are many more types of validations you can use to ensure users don’t rely on weak passwords.</p>
 </p>
         </a>
       </li>
