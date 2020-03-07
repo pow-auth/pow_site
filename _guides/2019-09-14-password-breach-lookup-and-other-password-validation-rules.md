@@ -5,7 +5,7 @@ date:   2019-09-14 15:38:05 -0100
 author: Maarten van Vliet, Dan Schultzer
 ---
 
-By default Pow has a lax requirement of minimum 10 characters based on [NIST 800-132](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf), but there are many more types of validations you can use to ensure users don't rely on weak passwords.
+By default Pow has a lax requirement of minimum 8 characters based on [NIST SP800-63b](https://pages.nist.gov/800-63-3/sp800-63b.html), but there are many more types of validations you can use to ensure users don't rely on weak passwords.
 
 An important aspect to password requirements is that it should be user friendly. Requirements to mix alphanumeric with symbols and upper- and lowercase characters haven't proven effective. In the following we'll go through some effective methods to ensure users uses strong passwords.
 
