@@ -93,6 +93,12 @@ defmodule MyAppWeb.RegistrationControllerTest do
         password_confirmation: "secret1234"
       }, repo: Repo, user: User)
 
+    {:ok, user} =
+      Pow.Ecto.Context.update(user, %{
+        email: "updated@example.com",
+        current_password: "secret1234"
+      }, repo: Repo, user: User)
+
     conn = Pow.Plug.assign_current_user(conn, user, otp_app: :my_app)
 
     {:ok, conn: conn, user: user}
@@ -107,7 +113,7 @@ defmodule MyAppWeb.RegistrationControllerTest do
     end
 
     test "with already confirmed email", %{conn: conn, user: user} do
-      user = PowEmailConfirmation.Ecto.Context.confirm_email(user, otp_app: :my_app)
+      user = PowEmailConfirmation.Ecto.Context.confirm_email(user, %{}, otp_app: :my_app)
 
       conn =
         conn
