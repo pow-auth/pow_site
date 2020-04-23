@@ -216,7 +216,7 @@ defmodule MyApp.Users.User do
       |> String.downcase()
       |> password_in_dictionary?()
       |> case do
-        true  -> [password: "is too common"]
+        true  -> [password: "is dictionary word"]
         false -> []
       end
     end)
@@ -245,8 +245,8 @@ You may want to ensure that users update their password if they have been breach
 This can be dealt with in a plug, or [custom controller](https://hexdocs.pm/pow/custom_controllers.html). A plug method could look like this:
 
 ```elixir
-def check_password(conn, _opts) do
-  changeset = MyApp.Users.User.changeset(%MyApp.Users.User{}, conn.params["user"])
+def check_password(%{params: %{"user" => user_params}} = conn, _opts) do
+  changeset = MyApp.Users.User.changeset(%MyApp.Users.User{}, user_params)
 
   case changeset.errors[:password] do
     nil ->
@@ -299,13 +299,13 @@ defmodule MyApp.Users.UserTest do
     end
 
     # The below is for username user id
-    changeset = User.changeset(%User{}, %{"username" => "john.doe", "password" => "password12"})
-    refute changeset.errors[:password]
+    # changeset = User.changeset(%User{}, %{"username" => "john.doe", "password" => "password12"})
+    # refute changeset.errors[:password]
 
-    for invalid <- ["john.doe00", "johndoe", "johndoe1"] do
-      changeset = User.changeset(%User{}, %{"username" => "john.doe", "password" => invalid})
-      assert changeset.errors[:password] == {"is too similar to username, email or My Demo App", []}
-    end
+    # for invalid <- ["john.doe00", "johndoe", "johndoe1"] do
+    #   changeset = User.changeset(%User{}, %{"username" => "john.doe", "password" => invalid})
+    #   assert changeset.errors[:password] == {"is too similar to username, email or My Demo App", []}
+    # end
   end
 
   test "changeset/2 validates repetitive and sequential password" do
@@ -326,6 +326,53 @@ defmodule MyApp.Users.UserTest do
 
     changeset = User.changeset(%User{}, %{"password" => "secretafgh"})
     refute changeset.errors[:password]
+  end
+
+  @dictionary_word "anteater"
+
+  test "changeset/2 validates dictionary word" do
+    changeset = User.changeset(%User{}, %{"password" => @dictionary_word})
+    assert changeset.errors[:password] == {"is dictionary word", []}
+
+    changeset = User.changeset(%User{}, %{"password" => "#{@dictionary_word} battery staple"})
+    refute changeset.errors[:password]
+  end
+end
+```
+
+```elixir
+defmodule Pow.Controllers.SessionControllerTest do
+  use MyAppWeb.ConnCase
+
+  alias MyApp.{Repo, Users.User}
+
+  describe "POST /session" do
+    @weak_password "123456"
+    @strong_password "horse battery staple"
+
+    test "with insecure password", %{conn: conn} do
+      user = user_fixture(@weak_password)
+      conn = post(conn, Routes.pow_session_path(conn, :create), %{"user" => %{"email" => user.email, password: @weak_password}})
+
+      assert redirected_to(conn) == Routes.pow_reset_password_reset_password_path(conn, :new)
+      refute Pow.Plug.current_user(conn)
+      assert get_flash(conn, :error) == "You have to reset your password because it has sequential characters"
+    end
+
+    test "with strong password", %{conn: conn} do
+      user = user_fixture(@strong_password)
+      conn = post(conn, Routes.pow_session_path(conn, :create), %{"user" => %{"email" => user.email, password: @strong_password}})
+
+      assert redirected_to(conn) == Routes.pow_reset_password_reset_password_path(conn, :new)
+      assert Pow.Plug.current_user(conn)
+    end
+  end
+
+  defp user_fixture(password) do
+    Repo.insert!(%User{
+      email: "test@example.com",
+      password_hash: Pow.Ecto.Schema.Password.pbkdf2_hash(password)
+    })
   end
 end
 ```
