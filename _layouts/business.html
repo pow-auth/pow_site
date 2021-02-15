@@ -1,0 +1,21 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  {% feed_meta %}
+  {% seo %}
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<html>
+  <body class="bg-gray-200 text-gray-600">
+    {{ content }}
+      
+    <footer class="text-center mb-6 mt-20 px-6">
+      <p class="text-xs">Copyright © 2019</p>
+    </footer>
+      
+    {% if jekyll.environment == 'production' %}
+      {% include analytics.html %}
+    {% endif %}
+  </body>
+</html>
+
